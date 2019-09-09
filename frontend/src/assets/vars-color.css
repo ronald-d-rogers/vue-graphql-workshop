@@ -1,0 +1,20 @@
+:root {
+  --white-smoke: rgba(245, 248, 247, 1);
+  --mellow-apricot: rgba(244, 191, 118, 1);
+  --mint: rgba(65, 184, 131, 1);
+  --light-mint: rgb(174, 230, 207);
+  --neon-carrot: rgba(245, 151, 72, 1);
+  --police-blue: rgb(52, 73, 94);
+  --police-blue-dark: rgb(18, 25, 33);
+
+  --color-primary: var(--white-smoke);
+  --color-primary-accent: var(--mellow-apricot);
+  --color-secondary-accent: var(--mint);
+  --color-secondary: var(--light-mint);
+  --color-medium: var(--police-blue);
+  --color-dark: var(--police-blue-dark);
+
+  --color-font: var(--color-primary);
+  --color-background: var(--color-dark);
+  --color-link: var(--color-secondary);
+}

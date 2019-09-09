@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url(vars-color.css);
+
+* {
+  box-sizing: border-box;
+}
+html {
+  text-rendering: optimizeLegibility;
+}
+body {
+  margin: 0;
+  background: var(--color-background);
+  font-family: 'Open Sans', sans-serif;
+  color: var(--color-font);
+}
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+.fontBase {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+.fontHeadingSm {
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+.fontHeadingMd {
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: -0.32px;
+}
+.fontHeadingLg {
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.64px;
+}
