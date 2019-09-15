@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueApollo from 'vue-apollo'
-import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client'
+import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client'
+import { BatchHttpLink } from 'apollo-link-batch-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 // Install the vue plugin
@@ -15,6 +16,10 @@ const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'http://localhost:3000/
 export const filesRoot = process.env.VUE_APP_FILES_ROOT || httpEndpoint.substr(0, httpEndpoint.indexOf('/graphql'))
 
 Vue.prototype.$filesRoot = filesRoot
+
+const link = new BatchHttpLink({
+  uri: httpEndpoint
+})
 
 // Config
 const defaultOptions = {
@@ -34,10 +39,11 @@ const defaultOptions = {
   ssr: false,
 
   // Override default http link
-  // link: myLink
+  defaultHttpLink: false,
+  link,
 
-   // Override default cache
-   cache: new InMemoryCache({
+  // Override default cache
+  cache: new InMemoryCache({
     freezeResults: false
   })
 

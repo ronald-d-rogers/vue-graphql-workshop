@@ -1,12 +1,12 @@
 <script>
 import gql from 'graphql-tag'
 import ArticleBody from './ArticleBody'
+import ArticleByline from './ArticleByline'
+
 export default {
   components: {
+    ArticleByline,
     ArticleBody
-  },
-  props: {
-    article: { type: Object, required: true }
   },
   fragments: {
     article: gql`
@@ -17,16 +17,14 @@ export default {
         imageUrl
         body
         authors {
-          id
-          name
+          ...BylineAuthorContent
         }
       }
+      ${ArticleByline.fragments.bylineAuthor}
     `
   },
-  computed: {
-    authors() {
-      return this.article.authors
-    }
+  props: {
+    article: { type: Object, required: true }
   }
 }
 </script>
@@ -37,35 +35,35 @@ export default {
       <h1 :class="$style.headline">
         {{ article.title }}
       </h1>
-      <p
-        :class="$style.author"
-        v-if="!!authors.length"
-      >
-        By
-        <router-link
-          v-for="(author, index) in authors"
-          :to="{ name: 'author', params: { authorId: author.id } }">
-          {{ author.name }}<span v-if="index !== (authors.length - 1)">, </span>
-        </router-link>
-      </p>
+      <ArticleByline
+        v-if="!!article.authors.length"
+        v-bind="{ authors: article.authors }"
+        :class="$style.byline"
+      />
       <p
         v-if="article.postedDate"
         :class="$style.date">
-        {{ article.postedDate | apDate }}</p>
+        {{ article.postedDate | apDate }}
+      </p>
     </header>
     <img
       v-if="article.imageUrl"
       :src="article.imageUrl"
-      :class="$style.imageLead">
+      :class="$style.imageLead"
+    >
     <ArticleBody
       v-if="!!article.body"
-      v-bind="{ body: article.body }"/>
+      v-bind="{ body: article.body }"
+    />
   </article>
 </template>
 
 <style module>
 .article {
   margin: 0 16px 48px;
+}
+.byline {
+  margin: 0 0 6px;
 }
 .header {
   margin-bottom: 24px;
@@ -75,10 +73,6 @@ export default {
   margin: 0 0 20px;
   font-weight: bold;
   color: var(--color-secondary-accent);
-}
-.author {
-  margin: 0 0 6px;
-  color: var(--color-link);
 }
 .date {
   margin: 0 0 16px;

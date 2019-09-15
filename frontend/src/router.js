@@ -18,12 +18,12 @@ export default new Router({
       component: () => import('./views/Authors')
     },
     {
-      path: '/author/:authorId',
+      path: '/author/:id',
       name: 'author',
       component: () => import('./views/Author')
     },
     {
-      path: '/:articleId',
+      path: '/:id',
       name: 'article',
       component: () => import('./views/Article')
     }

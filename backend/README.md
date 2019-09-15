@@ -18,7 +18,11 @@ summary string
 body string
 imageUrl string
 postedDate string
+
+AuthorArticle
+-
 authorId int FK >- Author.id
+articleId int FK >- Article.id
 ```
 
 ## Build Setup

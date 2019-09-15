@@ -1,5 +1,5 @@
 <script>
-import gql from 'graphql-tag'
+import axios from 'axios'
 import Article from '../components/Article.vue'
 
 export default {
@@ -11,22 +11,22 @@ export default {
       article: null
     }
   },
-  apollo: {
-    article: {
-      query: gql`
-        query getArticle($id: ID!) {
-          article(id: $id) {
-            ...ArticleContent
-          }
-        }
-        ${Article.fragments.article}
-      `,
-      variables() {
-        return {
-          id: this.$route.params.articleId
-        }
-      }
-    }
+  mounted() {
+    axios
+      .get(`/article/${this.$route.params.id}`)
+      .then(res => {
+        const article = res.data
+
+        const authors = []
+        article.authors.forEach(id => {
+          axios
+            .get(`/author/${id}`)
+            .then(res => authors.push(res.data))
+          })
+
+        article.authors = authors
+        this.article = article
+      })
   }
 }
 </script>
@@ -34,5 +34,6 @@ export default {
 <template>
   <Article
     v-if="!!article"
-    v-bind="{ article }"/>
+    v-bind="{ article }"
+  />
 </template>

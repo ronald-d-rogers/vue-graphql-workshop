@@ -12,17 +12,17 @@ export default {
   },
   data() {
     return {
-      showHamburgerMenu: false
+      showMenu: false
     }
   },
   methods: {
-    closeHamburgerMenu() {
-      this.showHamburgerMenu = false
+    closeMenu() {
+      this.showMenu = false
       document.getElementById('hamburger-menu').classList.remove('menu-scroll')
       document.body.classList.remove('body-no-scroll')
     },
-    openHamburgerMenu() {
-      this.showHamburgerMenu = true
+    openMenu() {
+      this.showMenu = true
       document.getElementById('hamburger-menu').classList.add('menu-scroll')
       document.body.classList.add('body-no-scroll')
     }
@@ -37,7 +37,7 @@ export default {
       aria-owns="hamburger-menu"
       type="button"
       :class="$style.button"
-      @click.stop="() => openHamburgerMenu()"
+      @click.stop="() => openMenu()"
     >
       <MenuIcon/>
     </button>
@@ -47,11 +47,11 @@ export default {
       Vue GraphQL Workshop
     </router-link>
     <TheMenu
-      v-show="showHamburgerMenu"
+      v-show="showMenu"
       id="hamburger-menu"
-      :aria-hidden="!showHamburgerMenu"
+      :aria-hidden="!showMenu"
       :menu="menu"
-      @close="closeHamburgerMenu"
+      @close="closeMenu"
     />
   </header>
 </template>

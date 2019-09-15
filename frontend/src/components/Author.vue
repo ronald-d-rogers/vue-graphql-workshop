@@ -8,10 +8,6 @@ export default {
     AuthorBio,
     ArticleCard
   },
-  props: {
-    author: { type: Object, required: true },
-    showImageLead: { type: Boolean, required: false, default: true }
-  },
   fragments: {
     author: gql`
       fragment AuthorContent on Author {
@@ -24,6 +20,10 @@ export default {
       }
       ${ArticleCard.fragments.articleCard}
     `
+  },
+  props: {
+    author: { type: Object, required: true },
+    showImageLead: { type: Boolean, required: false, default: true }
   }
 }
 </script>
@@ -35,7 +35,7 @@ export default {
       v-for="article in author.articles"
       :key="article.id"
       :class="$style.card"
-      v-bind="{ article, showAuthor: false, showImageLead }"
+      v-bind="{ article, showByline: false, showImageLead }"
     />
     <template>
 </template>

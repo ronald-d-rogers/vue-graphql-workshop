@@ -6,8 +6,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
-function getRandomBoolean() {
-  return Math.random() >= 0.5
+function getRandomBoolean(chance = 0.5) {
+  return Math.random() <= chance
 }
 
 function bodyText(headingWordCount, paragraphCount) {
@@ -68,9 +68,9 @@ const articles = Array.from(
 // Create random associations between authors and articles
 for (const article of articles) {
   for (const author of authors) {
-    if (getRandomBoolean()) {
-      article.authors.push(author)
-      author.articles.push(article)
+    if (getRandomBoolean(1/3)) {
+      article.authors.push(author.id)
+      author.articles.push(article.id)
     }
   }
 }
@@ -85,10 +85,10 @@ const slice = (results, skip, first) =>
 
 module.exports = {
   getArticle(id) {
-    return articles.find(x => x.id = id)
+    return articles.find(x => x.id === id)
   },
   getAuthor(id) {
-    return authors.find(x => x.id = id)
+    return authors.find(x => x.id === id)
   },
   getArticles({ filter = {}, skip = 0, first = 0 } = {}) {
     const filters = []
@@ -100,7 +100,7 @@ module.exports = {
     }
 
     if (filter.authors && filter.authors.id >= 0) {
-      filters.push(x => x.authors.some(y => y.id === filter.authors.id))
+      filters.push(x => x.authors.some(y => y === filter.authors.id))
     }
 
     return slice(reduce(articles, filters), skip, first)
@@ -115,7 +115,7 @@ module.exports = {
     }
 
     if (filter.articles && filter.articles.id >= 0) {
-      filters.push(x => x.articles.some(y => y.id === filter.articles.id))
+      filters.push(x => x.articles.some(y => y === filter.articles.id))
     }
 
     return slice(reduce(authors, filters), skip, first)

@@ -32,7 +32,7 @@ storiesOf('Articles', module)
   .add('Article Card without author',
     () => ({
       components: { ArticleCard },
-      template: '<ArticleCard v-bind="{ article, showAuthor: false }"/>',
+      template: '<ArticleCard v-bind="{ article, showByline: false }"/>',
       data() {
         return {
           article

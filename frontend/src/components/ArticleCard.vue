@@ -1,10 +1,10 @@
 <script>
 import gql from 'graphql-tag'
+import ArticleByline from './ArticleByline'
+
 export default {
-  props: {
-    article: { type: Object, required: true },
-    showImageLead: { type: Boolean, required: false, default: true },
-    showAuthor: { type: Boolean, required: false, default: true }
+  components: {
+    ArticleByline
   },
   fragments: {
     articleCard: gql`
@@ -14,11 +14,16 @@ export default {
         imageUrl
         summary
         authors {
-          id
-          name
+          ...BylineAuthorContent
         }
       }
+      ${ArticleByline.fragments.bylineAuthor}
     `
+  },
+  props: {
+    article: { type: Object, required: true },
+    showImageLead: { type: Boolean, required: false, default: true },
+    showByline: { type: Boolean, required: false, default: true }
   }
 }
 </script>
@@ -28,22 +33,20 @@ export default {
     <h2
       v-if="!!article.title"
       :class="$style.headline">
-      <router-link :to="{ name: 'article', params: { articleId: article.id } }">
+      <router-link :to="{ name: 'article', params: { id: article.id } }">
         {{ article.title }}
       </router-link>
     </h2>
     <img
       v-if="showImageLead && !!article.imageUrl"
       :src="article.imageUrl"
-      :class="$style.imageLead">
-    <p
-      v-if="showAuthor && !!article.author && !!article.author.name"
-      :class="$style.author"
+      :class="$style.imageLead"
     >
-      By <router-link :to="{ name: 'author', params: { authorId: article.author.id } }">
-        {{ article.author.name }}
-      </router-link>
-    </p>
+    <ArticleByline
+      v-if="showByline && !!article.authors.length"
+      v-bind="{ authors: article.authors }"
+      :class="$style.byline"
+    />
     <p
       v-if="!!article.summary"
       :class="$style.summary">
@@ -56,7 +59,7 @@ export default {
 .articleCard {
   margin: 48px 0;
 }
-.author {
+.byline {
   margin: 0 0 16px;
 }
 .headline {
