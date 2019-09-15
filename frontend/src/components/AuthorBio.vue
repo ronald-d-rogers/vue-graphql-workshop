@@ -6,8 +6,8 @@ export default {
     Avatar
   },
   props: {
-    author: { type: Object, requried: true },
-    showAvatar: { type: Boolean, requried: false, default: true }
+    author: { type: Object, required: true },
+    showAvatar: { type: Boolean, required: false, default: true }
   }
 }
 </script>

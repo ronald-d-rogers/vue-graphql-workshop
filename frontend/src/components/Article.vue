@@ -1,4 +1,5 @@
 <script>
+import gql from 'graphql-tag'
 import ArticleBody from './ArticleBody'
 export default {
   components: {
@@ -6,6 +7,26 @@ export default {
   },
   props: {
     article: { type: Object, required: true }
+  },
+  fragments: {
+    article: gql`
+      fragment ArticleContent on Article {
+        id
+        title
+        postedDate
+        imageUrl
+        body
+        authors {
+          id
+          name
+        }
+      }
+    `
+  },
+  computed: {
+    authors() {
+      return this.article.authors
+    }
   }
 }
 </script>
@@ -18,11 +39,13 @@ export default {
       </h1>
       <p
         :class="$style.author"
-        v-if="!!article.author.name"
+        v-if="!!authors.length"
       >
         By
-        <router-link :to="{ name: 'author', params: { authorId: article.author.id } }">
-          {{ article.author.name }}
+        <router-link
+          v-for="(author, index) in authors"
+          :to="{ name: 'author', params: { authorId: author.id } }">
+          {{ author.name }}<span v-if="index !== (authors.length - 1)">, </span>
         </router-link>
       </p>
       <p

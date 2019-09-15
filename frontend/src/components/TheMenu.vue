@@ -1,53 +1,54 @@
 <script>
-import { directive as onClickaway } from 'vue-clickaway';
+import { directive as clickOutside } from 'vue-clickaway';
 import CloseIcon from './IconClose'
 
 export default {
   directives: {
-    onClickaway: onClickaway,
+    clickOutside,
   },
   components: {
     CloseIcon
   },
   props: {
-    menu: { type: Array, required: true },
-    close: { type: Function, required: true }
+    menu: { type: Array, required: true }
   }
 }
 </script>
 
 <template>
-  <div
-    v-on-clickaway="close"
-    :class="$style.menu"
-  >
+  <transition name="menu">
     <div
-      :class="$style.closeIcon"
-      @click="close"
+      v-click-outside="() => $emit('close')"
+      :class="$style.menu"
     >
-      <CloseIcon/>
-    </div>
-    <nav :class="$style.nav">
-      <ul
-        v-if="!!menu"
-        :class="$style.list"
+      <div
+        :class="$style.closeIcon"
+        @click="$emit('close')"
       >
-        <li
-          v-for="item in menu"
-          :key="item.id"
-          :class="$style.item"
+        <CloseIcon/>
+      </div>
+      <nav :class="$style.nav">
+        <ul
+          v-if="!!menu"
+          :class="$style.list"
         >
-        <router-link
-          class="menu-link"
-          :to="{ name: item.name }"
-          @click.native="close"
-        >
-          {{ item.label }}
-        </router-link>
-        </li>
-      </ul>
-    </nav>
-  </div>
+          <li
+            v-for="item in menu"
+            :key="item.id"
+            :class="$style.item"
+          >
+            <router-link
+              class="menu-link"
+              :to="{ name: item.name }"
+              @click.native="$emit('close')"
+            >
+              {{ item.label }}
+            </router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </transition>
 </template>
 
 <style module>
@@ -94,6 +95,22 @@ component. If there are more than a few style it's probably better
 to have a separte component. */
 
 .menu-link.router-link-exact-active {
-  color: var(--rose-ebony)
+  color: var(--light-mint)
 }
 </style>
+
+<style>
+.menu-leave-active,
+.menu-enter-active {
+  transition: 0.35s;
+}
+.menu-enter {
+  transform: translate(-100%, 0);
+  opacity: 0;
+}
+.menu-leave-to {
+  transform: translate(-100%, 0);
+  opacity: 0;
+}
+</style>
+

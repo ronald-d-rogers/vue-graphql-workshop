@@ -37,7 +37,8 @@ export default {
       aria-owns="hamburger-menu"
       type="button"
       :class="$style.button"
-      @click="() => openHamburgerMenu()">
+      @click.stop="() => openHamburgerMenu()"
+    >
       <MenuIcon/>
     </button>
     <router-link
@@ -50,7 +51,8 @@ export default {
       id="hamburger-menu"
       :aria-hidden="!showHamburgerMenu"
       :menu="menu"
-      :close="closeHamburgerMenu"/>
+      @close="closeHamburgerMenu"
+    />
   </header>
 </template>
 

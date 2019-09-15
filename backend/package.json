@@ -6,8 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start:rest": "forever -w --minUptime=1000 --spinSleepTime=1000 server.rest.js",
-    "start:graphql": "forever -w --minUptime=1000 --spinSleepTime=1000 server.graphql.js"
+    "start": "forever -w --minUptime=1000 --spinSleepTime=1000 server.js"
   },
   "dependencies": {
     "apollo-server-express": "^1.3.2",

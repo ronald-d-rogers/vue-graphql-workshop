@@ -10,25 +10,12 @@ export default {
   apollo: {
     author: {
       query: gql`
-        query getAuthor($id: Int!) {
+        query getAuthor($id: ID!) {
           author(id: $id) {
-            id
-            name
-            avatarUrl
-            bio
-            articles {
-              id
-              title
-              imageUrl
-              summary
-              postedDate
-              author {
-                id
-                name
-              }
-            }
+            ...AuthorContent
           }
         }
+        ${Author.fragments.author}
       `,
       variables() {
         return {

@@ -1,4 +1,3 @@
-
 <script>
 import gql from 'graphql-tag'
 import ArticleList from '../components/ArticleList.vue'
@@ -11,17 +10,10 @@ export default {
     articles: gql`
       query getArticles {
         articles {
-          id
-          title
-          imageUrl
-          summary
-          postedDate
-          author {
-            id
-            name
-          }
+          ...ArticleCardContent
         }
       }
+      ${ArticleList.fragments.articleCard}
     `
   }
 }

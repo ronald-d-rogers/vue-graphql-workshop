@@ -1,9 +1,24 @@
 <script>
+import gql from 'graphql-tag'
 export default {
   props: {
     article: { type: Object, required: true },
     showImageLead: { type: Boolean, required: false, default: true },
     showAuthor: { type: Boolean, required: false, default: true }
+  },
+  fragments: {
+    articleCard: gql`
+      fragment ArticleCardContent on Article {
+        id
+        title
+        imageUrl
+        summary
+        authors {
+          id
+          name
+        }
+      }
+    `
   }
 }
 </script>

@@ -1,47 +1,44 @@
-const express = require('express')
-const bodyParser = require('body-parser')
 const merge = require('deepmerge')
 const gql = require('graphql-tag')
-const cors = require('cors')
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const { makeExecutableSchema } = require('graphql-tools')
+const { graphqlExpress } = require('apollo-server-express')
 
 const db = require('./database.js')
 
 // The GraphQL schema in string form
 const typeDefs = gql`
-  input AuthorFilter {
-    id: ID
-    name: String
-  }
-  input ArticleFilter {
-    id: ID
-  }
-  type Article {
-    id: ID!
-    title: String!
-    summary: String
-    body: String
-    imageUrl: String
-    authors(filter: AuthorFilter, skip: Int, first: Int): [Author]
-    postedDate: String
-  }
-  type Author {
-    id: ID!
-    name: String!
-    bio: String
-    avatarUrl: String
-    articles(filter: ArticleFilter, skip: Int, first: Int): [Article]
-  }
-  type Query {
-    author (id: ID!): Author
-    article (id: ID!): Article
-    articles (filter: ArticleFilter, skip: Int, first: Int): [Article]
-    authors (filter: AuthorFilter, skip: Int, first: Int): [Author]
-  }
-  type Mutation {
-    updateAuthor (id: ID!, name: String!): Author
-  }
+    input AuthorFilter {
+        id: ID
+        name: String
+    }
+    input ArticleFilter {
+        id: ID
+    }
+    type Article {
+        id: ID!
+        title: String!
+        summary: String
+        body: String
+        imageUrl: String
+        authors(filter: AuthorFilter, skip: Int, first: Int): [Author]
+        postedDate: String
+    }
+    type Author {
+        id: ID!
+        name: String!
+        bio: String
+        avatarUrl: String
+        articles(filter: ArticleFilter, skip: Int, first: Int): [Article]
+    }
+    type Query {
+        author (id: ID!): Author
+        article (id: ID!): Article
+        articles (filter: ArticleFilter, skip: Int, first: Int): [Article]
+        authors (filter: AuthorFilter, skip: Int, first: Int): [Author]
+    }
+    type Mutation {
+        updateAuthor (id: ID!, name: String!): Author
+    }
 `
 
 // The resolvers
@@ -78,22 +75,4 @@ const schema = makeExecutableSchema({
   resolvers,
 })
 
-// Initialize the app
-const app = express()
-
-app.use(cors())
-
-app.use('/assets', express.static('assets'))
-
-// The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
-
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
-
-const port = process.env.PORT || 3000
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server started on at localhost:${port}. Go to http://localhost:${port}/graphiql to run queries!`)
-})
+module.exports = graphqlExpress({ schema })

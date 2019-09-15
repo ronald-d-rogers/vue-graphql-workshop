@@ -10,16 +10,10 @@ export default {
     authors: gql`
       query getAuthors {
         authors {
-          id
-          name
-          bio
-          articles {
-            id
-            title
-            postedDate
-          }
+          ...AuthorContent
         }
       }
+      ${Authors.fragments.author}
     `
   }
 }

@@ -6,22 +6,20 @@ export default {
   components: {
     Article
   },
+  data () {
+    return {
+      article: null
+    }
+  },
   apollo: {
     article: {
       query: gql`
-        query getArticle($id: Int!) {
+        query getArticle($id: ID!) {
           article(id: $id) {
-            id
-            title
-            imageUrl
-            body
-            postedDate
-            authors {
-              id
-              name
-            }
+            ...ArticleContent
           }
         }
+        ${Article.fragments.article}
       `,
       variables() {
         return {
