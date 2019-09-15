@@ -1,6 +1,11 @@
 <script>
+import { directive as onClickaway } from 'vue-clickaway';
 import CloseIcon from './IconClose'
+
 export default {
+  directives: {
+    onClickaway: onClickaway,
+  },
   components: {
     CloseIcon
   },
@@ -13,14 +18,14 @@ export default {
 
 <template>
   <div
-    v-click-outside="close"
+    v-on-clickaway="close"
     :class="$style.menu"
   >
     <div
       :class="$style.closeIcon"
       @click="close"
     >
-    <CloseIcon/>
+      <CloseIcon/>
     </div>
     <nav :class="$style.nav">
       <ul

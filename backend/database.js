@@ -1,11 +1,13 @@
 const faker = require('faker')
 
-const avatarUrl = 'http://localhost:3000/assets/avatar.png'
-
 function getRandomInt(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min)) + min
+}
+
+function getRandomBoolean() {
+  return Math.random() >= 0.5
 }
 
 function bodyText(headingWordCount, paragraphCount) {
@@ -26,130 +28,114 @@ function postedDate(days) {
   return faker.date.recent(days)
 }
 
-const authors = [
-  {
-    id: 0,
-    name: 'News Author 1',
-    bio: faker.lorem.paragraph(getRandomInt(5, 7)),
-    avatarUrl: avatarUrl
-  },
-  {
-    id: 1,
-    name: 'News Author 2',
-    bio: faker.lorem.paragraph(getRandomInt(5, 7)),
-    avatarUrl: avatarUrl
-  },
-  {
-    id: 2,
-    name: 'News Author 3',
-    bio: faker.lorem.paragraph(getRandomInt(5, 7)),
-    avatarUrl: avatarUrl
-  }
+const avatarUrl = 'http://localhost:3000/assets/avatar.png'
+
+const imageUrls = [
+  'http://localhost:3000/assets/animals1.png',
+  'http://localhost:3000/assets/animals2.png',
+  'http://localhost:3000/assets/animals3.png',
+  'http://localhost:3000/assets/cats1.png',
+  'http://localhost:3000/assets/cats2.png',
+  'http://localhost:3000/assets/cats3.png',
+  'http://localhost:3000/assets/nature1.png',
+  'http://localhost:3000/assets/nature2.png',
+  'http://localhost:3000/assets/nature3.png',
+  'http://localhost:3000/assets/transport1.png',
 ]
 
-const articles = [
-  {
-    id: 0,
-    title: 'Headline for News Article 1',
+const authors = Array.from(
+  { length: 9 },
+  (v, id) => ({
+    id: id,
+    name: `News Author ${id}`,
+    bio: faker.lorem.paragraph(getRandomInt(5, 7)),
+    avatarUrl: avatarUrl,
+    articles: []
+  }))
+
+const articles = Array.from(
+  { length: 9 },
+  (v, id) => ({
+    id: id,
+    title: `Headline for News Article ${id}`,
     summary: faker.lorem.paragraph(getRandomInt(3, 5)),
     body: bodyText(3, 8),
-    imageUrl: 'http://localhost:3000/assets/animals1.jpg',
-    authorId: 0,
-    postedDate: postedDate(0)
-  },
-  {
-    id: 1,
-    title: 'Headline for News Article 2',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(2, 10),
-    imageUrl: 'http://localhost:3000/assets/cats1.jpg',
-    authorId: 0,
-    postedDate: postedDate(1)
-  },
-  {
-    id: 2,
-    title: 'Headline for News Article 3',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(2, 10),
-    imageUrl: 'http://localhost:3000/assets/nature1.jpg',
-    authorId: 0,
-    postedDate: postedDate(1)
-  },
-  {
-    id: 3,
-    title: 'Headline for News Article 4',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/animals2.jpg',
-    authorId: 1,
-    postedDate: postedDate(1)
-  },
-  {
-    id: 4,
-    title: 'Headline for News Article 5',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/cats2.jpg',
-    authorId: 2,
-    postedDate: postedDate(2)
-  },
-  {
-    id: 5,
-    title: 'Headline for News Article 6',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/nature2.jpg',
-    authorId: 0,
-    postedDate: postedDate(2)
-  },
-  {
-    id: 6,
-    title: 'Headline for News Article 7',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/animals3.jpg',
-    authorId: 1,
-    postedDate: postedDate(2)
-  },
-  {
-    id: 7,
-    title: 'Headline for News Article 8',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/cats3.jpg',
-    authorId: 1,
-    postedDate: postedDate(2)
-  },
-  {
-    id: 8,
-    title: 'Headline for News Article 9',
-    summary: faker.lorem.paragraph(getRandomInt(3, 5)),
-    body: bodyText(5, 20),
-    imageUrl: 'http://localhost:3000/assets/nature3.jpg',
-    authorId: 2,
-    postedDate: postedDate(2)
+    imageUrl: imageUrls[getRandomInt(0, 9)],
+    postedDate: postedDate(getRandomInt(1, 3)),
+    authors: []
+  }))
+
+// Create random associations between authors and articles
+for (const article of articles) {
+  for (const author of authors) {
+    if (getRandomBoolean()) {
+      article.authors.push(author)
+      author.articles.push(article)
+    }
   }
-]
+}
+
+const reduce = (items, filters) =>
+  filters.reduce((results, filter) => results.filter(filter), items)
+
+const slice = (results, skip, first) =>
+  results
+    .slice(skip)
+    .slice(0, first || results.length)
 
 module.exports = {
   getArticle(id) {
-    return articles.find(x => x.id === id)
+    return articles.find(x => x.id = id)
   },
   getAuthor(id) {
-    return authors.find(x => x.id === id)
+    return authors.find(x => x.id = id)
   },
-  getArticles() {
-    return articles
+  getArticles({ filter = {}, skip = 0, first = 0 } = {}) {
+    const filters = []
+
+    console.info(filter)
+
+    if (filter.id >= 0) {
+      filters.push(x => x.id === filter.id)
+    }
+
+    if (filter.authors && filter.authors.id >= 0) {
+      filters.push(x => x.authors.some(y => y.id === filter.authors.id))
+    }
+
+    return slice(reduce(articles, filters), skip, first)
   },
-  getAuthors() {
-    return authors
+  getAuthors({ filter = {}, skip = 0, first = 0 } = {}) {
+    const filters = []
+
+    console.info(filter)
+
+    if (filter.id >= 0) {
+      filters.push(x => x.id === id)
+    }
+
+    if (filter.articles && filter.articles.id >= 0) {
+      filters.push(x => x.articles.some(y => y.id === filter.articles.id))
+    }
+
+    return slice(reduce(authors, filters), skip, first)
   },
-  getArticlesByAuthor(id) {
-    return articles.filter(x => x.authorId === id)
+  updateArticle(id, input) {
+    const article = articles.find(x => x.id === id)
+
+    for (const prop in input) {
+      article[prop] = input[prop]
+    }
+
+    return article
   },
-  setAuthorName(id, name) {
+  updateAuthor(id, input) {
     const author = authors.find(x => x.id === id)
-    author.name = name
+
+    for (const prop in input) {
+      author[prop] = input[prop]
+    }
+
     return author
   }
 }

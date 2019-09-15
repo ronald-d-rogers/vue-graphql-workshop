@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-    <section
+  <section
     class="article-body"
     v-html="body"/>
 </template>
@@ -16,7 +16,7 @@ export default {
 /* Styles markup delivered by GraphQL so CSS Modules can't be used.
 There are 2 options: create a second style block or create a child
 component. If there are more than a few style it's probably better
-to have a separte component. */
+to have a separate component. */
 
 .article-body {
   & h2 {

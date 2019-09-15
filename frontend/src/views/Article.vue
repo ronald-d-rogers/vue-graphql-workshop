@@ -16,7 +16,7 @@ export default {
             imageUrl
             body
             postedDate
-            author {
+            authors {
               id
               name
             }
