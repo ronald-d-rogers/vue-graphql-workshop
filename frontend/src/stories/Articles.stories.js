@@ -4,10 +4,10 @@ import ArticleCard from '../components/ArticleCard.vue'
 import ArticleList from '../components/ArticleList.vue'
 
 const article = {
-  author: {
+  authors: [{
     id: 0,
     name: 'Author 1'
-  },
+  }],
   id: 0,
   imageUrl: 'http://localhost:3000/assets/animals1.jpg',
   postedDate: 'Fri Aug 17 2018 08:17:20 GMT-0400 (EDT)',
@@ -47,10 +47,10 @@ storiesOf('Articles', module)
   data() {
     return {
       article: {
-        author: {
+        authors: [{
           id: 0,
           name: 'Author'
-        },
+        }],
         id: 0,
         imageUrl: 'http://localhost:3000/assets/animals1.jpg',
         postedDate: 'Fri Aug 17 2018 08:17:20 GMT-0400 (EDT)',
