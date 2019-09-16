@@ -9,13 +9,16 @@ export default {
   directives: {
     clickOutside,
   },
+  props: {
+    id: { type: Number, required: true }
+  },
   data() {
     return {
       name: ''
     }
   },
-  props: {
-    id: { type: Number, required: true }
+  mounted() {
+    this.$refs.name.focus()
   },
   methods: {
     save() {
@@ -64,6 +67,7 @@ export default {
     <input
       v-model="name"
       :class="$style.input"
+      :ref="'name'"
       type="text"
       id="name"
       name="name"
