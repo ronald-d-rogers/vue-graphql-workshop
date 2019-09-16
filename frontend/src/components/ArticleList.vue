@@ -7,14 +7,14 @@ export default {
     ListContainer,
     ArticleCard
   },
+  // fragments: {
+  //   ...ArticleCard.fragments
+  // }
   props: {
     articles: { type: Array, required: true },
     title: { type: String, required: false, default: null },
     showImageLead: { type: Boolean, required: false, default: true },
   },
-  // fragments: {
-  //   ...ArticleCard.fragments
-  // }
 }
 </script>
 

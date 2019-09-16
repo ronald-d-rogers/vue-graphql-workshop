@@ -1,24 +1,24 @@
 <script>
-  // import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 
-  export default {
-    // fragments: {
-    //   bylineAuthor: gql`
-    //     fragment BylineAuthorContent on Author {
-    //       id
-    //       name
-    //     }
-    //   `
-    // },
-    props: {
-      authors: { type: Array, required: true }
-    },
-    computed: {
-      last() {
-        return this.authors.length - 1
-      }
+export default {
+  // fragments: {
+  //   bylineAuthor: gql`
+  //     fragment BylineAuthorContent on Author {
+  //       id
+  //       name
+  //     }
+  //   `
+  // },
+  props: {
+    authors: { type: Array, required: true }
+  },
+  computed: {
+    last() {
+      return this.authors.length - 1
     }
   }
+}
 </script>
 
 <template>
