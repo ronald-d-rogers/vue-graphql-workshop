@@ -10,9 +10,6 @@ export default {
   props: {
     id: { type: Number, required: true }
   },
-  props: {
-    id: { type: Number, required: true }
-  },
   data() {
     return {
       name: ''
