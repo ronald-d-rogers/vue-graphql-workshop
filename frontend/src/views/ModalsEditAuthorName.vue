@@ -1,13 +1,10 @@
 <script>
 // import gql from 'graphql-tag'
-// import ArticleByline from '../components/ArticleByline.vue'
 import axios from 'axios'
+// import ArticleCard from '../components/ArticleCard'
 import clickOutside from '../directives/click-outside'
 
 export default {
-  // components: {
-  //   ArticleByline
-  // },
   inject: ['modals'],
   directives: {
     clickOutside,
@@ -31,19 +28,18 @@ export default {
     //     mutation: gql`
     //     mutation updateAuthor($id: ID!, $name: String!) {
     //       updateAuthor(id: $id, name: $name) {
-    //         author {
-    //           id
-    //           articles {
-    //             ...ArticleBylineContent
-    //           }
+    //         id
+    //         articles {
+    //           ...ArticleCardContent
     //         }
     //       }
     //     }
-    //     ${ArticleByline.fragments.articleByline}
+    //     ${ArticleCard.fragments.articleCard}
     //   `,
-    //     variables: { id: this.id, id: this.id }
+    //     variables: { id: this.id, name: this.name }
     //   })
-    // }
+    //     .then(() => this.modals.close())
+    // },
     close() {
       this.modals.close()
     }

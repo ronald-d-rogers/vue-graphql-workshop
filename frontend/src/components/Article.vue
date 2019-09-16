@@ -1,5 +1,5 @@
 <script>
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 import ArticleBody from './ArticleBody'
 import ArticleByline from './ArticleByline'
 

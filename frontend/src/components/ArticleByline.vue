@@ -1,15 +1,15 @@
 <script>
-  // import gql from 'graphql-tag'
+  import gql from 'graphql-tag'
 
   export default {
-    // fragments: {
-    //   bylineAuthor: gql`
-    //     fragment BylineAuthorContent on Author {
-    //       id
-    //       name
-    //     }
-    //   `
-    // },
+    fragments: {
+      bylineAuthor: gql`
+        fragment BylineAuthorContent on Author {
+          id
+          name
+        }
+      `
+    },
     props: {
       authors: { type: Array, required: true }
     },

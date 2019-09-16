@@ -63,7 +63,6 @@ const resolvers = {
     articles: (root, args) => db.getArticles(args), // args = { filter, skip, first }
     authors: (root, args) => db.getAuthors(args) // args = { filter, skip, first }
   },
-
   Mutation: {
     updateAuthor: (root, args) => db.updateAuthor(args.id, args)
   }
@@ -72,7 +71,7 @@ const resolvers = {
 // Put together a schema
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers,
+  resolvers
 })
 
 module.exports = graphqlExpress({ schema })

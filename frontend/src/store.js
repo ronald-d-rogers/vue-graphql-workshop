@@ -22,6 +22,7 @@ export default new Vuex.Store({
 
           articles.forEach(article => {
             const authors = []
+            // Could have used authors endpoint with a filter here
             article.authors.forEach(id => {
               axios
                 .get(`/author/${id}`)

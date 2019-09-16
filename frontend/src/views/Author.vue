@@ -51,7 +51,6 @@ export default {
           this.author = author
         })
     },
-
   }
   // apollo: {
   //   author: {

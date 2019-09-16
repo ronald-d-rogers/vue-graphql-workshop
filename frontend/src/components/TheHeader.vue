@@ -62,7 +62,6 @@ export default {
 .header {
   display: flex;
   margin: 0 0 24px;
-  text-align: center;
 }
 .title {
   margin: 6px 0 0 0;
