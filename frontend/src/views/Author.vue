@@ -21,6 +21,11 @@ export default {
   mounted() {
     this.fetchAuthor()
   },
+  watch: {
+    id() {
+      this.fetchAuthor()
+    }
+  },
   methods: {
     fetchAuthor() {
       axios

@@ -22,6 +22,11 @@ export default {
       return this.$route.params.id
     }
   },
+  watch: {
+    id() {
+      this.fetchArticle()
+    }
+  },
   methods: {
     fetchArticle() {
       axios
@@ -41,11 +46,6 @@ export default {
         })
     }
   },
-  watch: {
-    id() {
-      this.fetchArticle()
-    }
-  }
   // apollo: {
   //   article: {
   //     query: gql`
