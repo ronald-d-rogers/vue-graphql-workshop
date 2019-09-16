@@ -14,7 +14,7 @@
       authors: { type: Array, required: true }
     },
     computed: {
-      lastIndex() {
+      last() {
         return this.authors.length - 1
       }
     }
@@ -31,7 +31,7 @@
       v-for="(author, index) in authors"
       :key="index"
       :to="{ name: 'author', params: { id: author.id } }">
-      {{ author.name }}<span v-if="index !== lastIndex">, </span>
+      {{ author.name }}<span v-if="index !== last">, </span>
     </router-link>
   </p>
 </template>

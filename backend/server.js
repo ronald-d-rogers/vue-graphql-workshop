@@ -11,7 +11,7 @@ app.use(cors())
 app.use('/assets', express.static('assets'))
 
 // The REST endpoints
-app.use('/v1', require('./server.rest'));
+app.use('/v1', require('./server.rest'))
 
 // The GraphQL endpoint
 app.use('/graphql', bodyParser.json(), require('./server.graphql'))
