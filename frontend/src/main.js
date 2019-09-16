@@ -5,6 +5,7 @@ import router from './router'
 import modals from './modals'
 import axios from'axios'
 import * as filters from './filters'
+import { createProvider } from './vue-apollo'
 
 Vue.config.productionTip = false
 
@@ -19,5 +20,6 @@ new Vue({
   router,
   store,
   provide: { modals },
+  apolloProvider: createProvider(),
   render: h => h(App)
 }).$mount('#app')

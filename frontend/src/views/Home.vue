@@ -1,19 +1,33 @@
 <script>
-import { mapActions, mapState } from 'vuex'
+import gql from 'graphql-tag'
+import { mapActions } from 'vuex'
 import ArticleList from '../components/ArticleList.vue'
 
 export default {
   components: {
     ArticleList
   },
-  computed: {
-    ...mapState(['articles'])
-  },
   methods: {
     ...mapActions(['fetchArticles'])
   },
   created() {
     this.fetchArticles()
+  },
+  apollo: {
+    articles: gql`
+      query getArticles {
+        articles {
+          id
+          title
+          imageUrl
+          summary
+          authors {
+            id
+            name
+          }
+        }
+      }
+    `
   }
 }
 </script>
