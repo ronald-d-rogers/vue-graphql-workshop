@@ -2,9 +2,9 @@ const express = require('express')
 
 const db = require('./database.js')
 
-const v1 = express.Router();
-v1.use(express.json());
-v1.use(express.urlencoded({ extended: true }));
+const v1 = express.Router()
+v1.use(express.json())
+v1.use(express.urlencoded({ extended: true }))
 
 v1.get('/articles', (req, res) => {
   if (res.body && res.body.authorId) {
