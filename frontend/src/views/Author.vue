@@ -1,5 +1,4 @@
 <script>
-// import gql from 'graphql-tag'
 import axios from 'axios'
 import Author from '../components/Author'
 
@@ -55,25 +54,8 @@ export default {
           author.articles = articles
           this.author = author
         })
-    },
+    }
   }
-  // apollo: {
-  //   author: {
-  //     query: gql`
-  //       query getAuthor($id: ID!) {
-  //         author(id: $id) {
-  //           ...AuthorContent
-  //         }
-  //       }
-  //       ${Author.fragments.author}
-  //     `,
-  //     variables() {
-  //       return {
-  //         id: this.$route.params.id
-  //       }
-  //     }
-  //   }
-  // }
 }
 </script>
 

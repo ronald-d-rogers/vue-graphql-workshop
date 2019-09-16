@@ -10,9 +10,6 @@ export default {
   props: {
     authors: { type: Array, required: true }
   }
-  // fragments: {
-  //   ...Author.fragments
-  // }
 }
 </script>
 

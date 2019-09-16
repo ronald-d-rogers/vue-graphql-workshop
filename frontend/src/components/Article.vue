@@ -1,5 +1,4 @@
 <script>
-// import gql from 'graphql-tag'
 import ArticleBody from './ArticleBody'
 import ArticleByline from './ArticleByline'
 
@@ -8,21 +7,6 @@ export default {
     ArticleByline,
     ArticleBody
   },
-  // fragments: {
-  //   article: gql`
-  //     fragment ArticleContent on Article {
-  //       id
-  //       title
-  //       postedDate
-  //       imageUrl
-  //       body
-  //       authors {
-  //         ...BylineAuthorContent
-  //       }
-  //     }
-  //     ${ArticleByline.fragments.bylineAuthor}
-  //   `
-  // },
   props: {
     article: { type: Object, required: true }
   }
@@ -46,11 +30,6 @@ export default {
         {{ article.postedDate | apDate }}
       </p>
     </header>
-    <!--<img-->
-      <!--v-if="article.imageUrl"-->
-      <!--:src="article.imageUrl"-->
-      <!--:class="$style.imageLead"-->
-    <!--&gt;-->
     <ArticleBody
       v-if="!!article.body"
       v-bind="{ body: article.body }"

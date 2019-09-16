@@ -1,13 +1,14 @@
 <script>
-// import gql from 'graphql-tag'
 import axios from 'axios'
-// import ArticleCard from '../components/ArticleCard'
 import clickOutside from '../directives/click-outside'
 
 export default {
   inject: ['modals'],
   directives: {
-    clickOutside,
+    clickOutside
+  },
+  props: {
+    id: { type: Number, required: true }
   },
   props: {
     id: { type: Number, required: true }
@@ -26,23 +27,6 @@ export default {
         .put(`/author/${this.id}`, { name: this.name })
         .then(() => this.modals.close())
     },
-    // save() {
-    //   return this.$apollo.mutate({
-    //     mutation: gql`
-    //     mutation updateAuthor($id: ID!, $name: String!) {
-    //       updateAuthor(id: $id, name: $name) {
-    //         id
-    //         articles {
-    //           ...ArticleCardContent
-    //         }
-    //       }
-    //     }
-    //     ${ArticleCard.fragments.articleCard}
-    //   `,
-    //     variables: { id: this.id, name: this.name }
-    //   })
-    //     .then(() => this.modals.close())
-    // },
     close() {
       this.modals.close()
     }

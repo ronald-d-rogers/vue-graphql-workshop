@@ -1,5 +1,4 @@
 <script>
-// import gql from 'graphql-tag'
 import AuthorBio from './AuthorBio'
 import ArticleCard from './ArticleCard'
 
@@ -8,19 +7,6 @@ export default {
     AuthorBio,
     ArticleCard
   },
-  // fragments: {
-  //   author: gql`
-  //     fragment AuthorContent on Author {
-  //       id
-  //       name
-  //       bio
-  //       articles {
-  //         ...ArticleCardContent
-  //       }
-  //     }
-  //     ${ArticleCard.fragments.articleCard}
-  //   `
-  // },
   props: {
     author: { type: Object, required: true },
     showImageLead: { type: Boolean, required: false, default: true }

@@ -1,5 +1,4 @@
 <script>
-// import gql from 'graphql-tag'
 import { mapActions, mapState } from 'vuex'
 import ArticleList from '../components/ArticleList.vue'
 
@@ -16,16 +15,6 @@ export default {
   created() {
     this.fetchArticles()
   }
-  // apollo: {
-  //   articles: gql`
-  //     query getArticles {
-  //       articles {
-  //         ...ArticleCardContent
-  //       }
-  //     }
-  //     ${ArticleList.fragments.articleCard}
-  //   `
-  // }
 }
 </script>
 

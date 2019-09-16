@@ -1,5 +1,4 @@
 <script>
-// import gql from 'graphql-tag'
 import axios from 'axios'
 import Authors from '../components/Authors.vue'
 
@@ -49,16 +48,6 @@ export default {
         })
     }
   }
-  // apollo: {
-  //   authors: gql`
-  //     query getAuthors {
-  //       authors {
-  //         ...AuthorContent
-  //       }
-  //     }
-  //     ${Authors.fragments.author}
-  //   `
-  // }
 }
 </script>
 

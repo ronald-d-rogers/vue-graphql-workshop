@@ -1,22 +1,7 @@
 <script>
-  // import gql from 'graphql-tag'
-  // import ArticleList from '../components/ArticleList.vue'
   import { mapState } from 'vuex'
 
   export default {
-    // components: {
-    //   ArticleList
-    // },
-    // apollo: {
-    //   articles: gql`
-    //     query getArticles {
-    //       articles {
-    //         ...ArticleCardContent
-    //       }
-    //     }
-    //     ${ArticleList.fragments.articleCard}
-    //   `
-    // }
     props: {
       articleId: { type: Number, required: true }
     },
