@@ -7,6 +7,9 @@ export default {
     ListContainer,
     ArticleCard
   },
+  fragments: {
+    ...ArticleCard.fragments
+  },
   props: {
     articles: { type: Array, required: true },
     title: { type: String, required: false, default: null },

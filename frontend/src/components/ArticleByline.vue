@@ -1,5 +1,15 @@
 <script>
+  import gql from 'graphql-tag'
+
   export default {
+    fragments: {
+      bylineAuthor: gql`
+        fragment BylineAuthorContent on Author {
+          id
+          name
+        }
+      `
+    },
     props: {
       authors: { type: Array, required: true }
     },
@@ -7,7 +17,8 @@
       last() {
         return this.authors.length - 1
       }
-    }
+    },
+
   }
 </script>
 

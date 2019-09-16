@@ -1,9 +1,24 @@
 <script>
+import gql from 'graphql-tag'
 import ArticleByline from './ArticleByline'
 
 export default {
   components: {
     ArticleByline
+  },
+  fragments: {
+    articleCard: gql`
+      fragment ArticleCardContent on Article {
+        id
+        title
+        imageUrl
+        summary
+        authors {
+          ...BylineAuthorContent
+        }
+      }
+      ${ArticleByline.fragments.bylineAuthor}
+    `
   },
   props: {
     article: { type: Object, required: true },

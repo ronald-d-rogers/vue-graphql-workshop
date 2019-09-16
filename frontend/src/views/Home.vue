@@ -17,16 +17,10 @@ export default {
     articles: gql`
       query getArticles {
         articles {
-          id
-          title
-          imageUrl
-          summary
-          authors {
-            id
-            name
-          }
+          ...ArticleCardContent
         }
       }
+      ${ArticleList.fragments.articleCard}
     `
   }
 }
