@@ -23,7 +23,7 @@ v1.get('/author/:id', (req, res) => {
 })
 
 v1.put('/author/:id', (req, res) => {
-  res.send(db.updateAuthor(req.params.id, req.body))
+  res.send(db.updateAuthor(parseInt(req.params.id), req.body))
 })
 
 module.exports = v1

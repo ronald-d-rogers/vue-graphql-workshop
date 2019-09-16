@@ -1,36 +1,20 @@
 <script>
 // import gql from 'graphql-tag'
-import axios from 'axios'
+import { mapActions, mapState } from 'vuex'
 import ArticleList from '../components/ArticleList.vue'
 
 export default {
   components: {
     ArticleList
   },
-  data () {
-    return {
-      articles: null
-    }
+  computed: {
+    ...mapState(['articles'])
   },
-  mounted() {
-    axios
-      .get(`/articles`)
-      .then(res => {
-        const articles = res.data
-
-        articles.forEach(article => {
-          const authors = []
-          article.authors.forEach(id => {
-            axios
-              .get(`/author/${id}`)
-              .then(res => authors.push(res.data))
-          })
-
-          article.authors = authors
-        })
-
-        this.articles = articles
-      })
+  methods: {
+    ...mapActions(['fetchArticles'])
+  },
+  created() {
+    this.fetchArticles()
   }
   // apollo: {
   //   articles: gql`
@@ -48,5 +32,9 @@ export default {
 <template>
   <ArticleList
     v-if="!!articles"
-    v-bind="{ articles, title: 'Hello World, Meet GraphQL' }"/>
+    v-bind="{
+      articles,
+      title: 'Hello World, Meet GraphQL'
+    }"
+  />
 </template>

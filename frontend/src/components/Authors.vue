@@ -9,24 +9,24 @@ export default {
   },
   props: {
     authors: { type: Array, required: true }
-  },
-  fragments: {
-    ...Author.fragments
   }
+  // fragments: {
+  //   ...Author.fragments
+  // }
 }
 </script>
 
 <template>
-<ListContainer>
-  <template v-slot>
-    <Author
-      v-for="author in authors"
-      :key="author.id"
-      :class="$style.item"
-      v-bind="{ author, showImageLead: false }"
-    />
-  </template>
-</ListContainer>
+  <ListContainer>
+    <template v-slot>
+      <Author
+        v-for="author in authors"
+        :key="author.id"
+        :class="$style.item"
+        v-bind="{ author, showImageLead: false }"
+      />
+    </template>
+  </ListContainer>
 </template>
 
 <style module>

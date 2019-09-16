@@ -1,25 +1,25 @@
 <script>
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 import ArticleByline from './ArticleByline'
 
 export default {
   components: {
     ArticleByline
   },
-  fragments: {
-    articleCard: gql`
-      fragment ArticleCardContent on Article {
-        id
-        title
-        imageUrl
-        summary
-        authors {
-          ...BylineAuthorContent
-        }
-      }
-      ${ArticleByline.fragments.bylineAuthor}
-    `
-  },
+  // fragments: {
+  //   articleCard: gql`
+  //     fragment ArticleCardContent on Article {
+  //       id
+  //       title
+  //       imageUrl
+  //       summary
+  //       authors {
+  //         ...BylineAuthorContent
+  //       }
+  //     }
+  //     ${ArticleByline.fragments.bylineAuthor}
+  //   `
+  // },
   props: {
     article: { type: Object, required: true },
     showImageLead: { type: Boolean, required: false, default: true },
@@ -37,11 +37,11 @@ export default {
         {{ article.title }}
       </router-link>
     </h2>
-    <img
-      v-if="showImageLead && !!article.imageUrl"
-      :src="article.imageUrl"
-      :class="$style.imageLead"
-    >
+    <!--<img-->
+      <!--v-if="showImageLead && !!article.imageUrl"-->
+      <!--:src="article.imageUrl"-->
+      <!--:class="$style.imageLead"-->
+    <!--&gt;-->
     <ArticleByline
       v-if="showByline && !!article.authors.length"
       v-bind="{ authors: article.authors }"
@@ -63,7 +63,7 @@ export default {
   margin: 0 0 16px;
 }
 .headline {
-  margin: 0 0 20px;
+  margin: 0 0 12px;
   composes: fontHeadingSm from "../assets/globals.css";
   font-weight: bold;
 }

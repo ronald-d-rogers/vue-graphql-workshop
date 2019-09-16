@@ -1,13 +1,16 @@
 <script>
 import menu from './data/menu.json'
+import Modals from './views/Modals.vue'
 import TheHeader from './components/TheHeader.vue'
 import TheFooter from './components/TheFooter.vue'
 
 export default {
+  inject: ['modals'],
   name: 'App',
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    Modals
   },
   data() {
     return {
@@ -24,6 +27,7 @@ export default {
     <TheHeader :menu="menu"/>
     <router-view/>
     <TheFooter/>
+    <Modals />
   </div>
 </template>
 

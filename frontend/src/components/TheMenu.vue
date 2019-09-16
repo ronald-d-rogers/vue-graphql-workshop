@@ -1,5 +1,5 @@
 <script>
-import { directive as clickOutside } from 'vue-clickaway';
+import clickOutside from '../directives/click-outside'
 import CloseIcon from './IconClose'
 
 export default {

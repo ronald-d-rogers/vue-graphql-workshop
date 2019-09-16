@@ -1,5 +1,5 @@
 <script>
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 import AuthorBio from './AuthorBio'
 import ArticleCard from './ArticleCard'
 
@@ -8,19 +8,19 @@ export default {
     AuthorBio,
     ArticleCard
   },
-  fragments: {
-    author: gql`
-      fragment AuthorContent on Author {
-        id
-        name
-        bio
-        articles {
-          ...ArticleCardContent
-        }
-      }
-      ${ArticleCard.fragments.articleCard}
-    `
-  },
+  // fragments: {
+  //   author: gql`
+  //     fragment AuthorContent on Author {
+  //       id
+  //       name
+  //       bio
+  //       articles {
+  //         ...ArticleCardContent
+  //       }
+  //     }
+  //     ${ArticleCard.fragments.articleCard}
+  //   `
+  // },
   props: {
     author: { type: Object, required: true },
     showImageLead: { type: Boolean, required: false, default: true }
@@ -30,16 +30,19 @@ export default {
 
 <template>
   <section :class="$style.author">
-    <AuthorBio v-bind="{ author }"/>
+    <AuthorBio
+      v-bind="{ author }"
+    />
     <ArticleCard
       v-for="article in author.articles"
       :key="article.id"
       :class="$style.card"
-      v-bind="{ article, showByline: false, showImageLead }"
+      v-bind="{
+        article,
+        showByline: true,
+        showImageLead
+      }"
     />
-    <template>
-</template>
-
   </section>
 </template>
 
@@ -48,7 +51,7 @@ export default {
   margin: 0 16px;
 }
 .card {
-  margin: 16px 0;
+  margin: 30px 0;
 }
 
 /* Here h2 isn't locally scopped. */

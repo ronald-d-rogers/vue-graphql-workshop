@@ -16,42 +16,44 @@ export default {
     }
   },
   methods: {
-    closeMenu() {
+    close() {
       this.showMenu = false
-      document.getElementById('hamburger-menu').classList.remove('menu-scroll')
-      document.body.classList.remove('body-no-scroll')
     },
-    openMenu() {
+    open() {
       this.showMenu = true
-      document.getElementById('hamburger-menu').classList.add('menu-scroll')
-      document.body.classList.add('body-no-scroll')
     }
   }
 }
 </script>
 
 <template>
-  <header :class="$style.header">
+  <header
+    :class="$style.header"
+  >
     <button
       aria-haspopup="true"
       aria-owns="hamburger-menu"
       type="button"
       :class="$style.button"
-      @click.stop="() => openMenu()"
+      @click.stop="open"
     >
       <MenuIcon/>
     </button>
-    <router-link
-      :to="{ name: 'home'}"
-      :class="$style.title">
-      Vue GraphQL Workshop
-    </router-link>
+    <h1
+      :class="$style.title"
+    >
+      <router-link
+        :class="$style.link"
+        :to="{ name: 'home'}">
+        Vue GraphQL Workshop
+      </router-link>
+    </h1>
     <TheMenu
       v-show="showMenu"
       id="hamburger-menu"
       :aria-hidden="!showMenu"
       :menu="menu"
-      @close="closeMenu"
+      @close="close"
     />
   </header>
 </template>
@@ -60,15 +62,21 @@ export default {
 .header {
   display: flex;
   margin: 0 0 24px;
+  text-align: center;
 }
 .title {
-  margin: 0;
+  margin: 6px 0 0 0;
   font-size: 30px;
   line-height: 36px;
   letter-spacing: -0.64px;
   color: var(--color-primary);
   font-weight: bold;
+  text-align: center;
   text-decoration: none;
+}
+.link {
+  margin: 6px 0 0 0;
+  color: var(--color-primary);
 }
 .button {
   flex: 0 0 auto;

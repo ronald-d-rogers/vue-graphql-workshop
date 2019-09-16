@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './store'
 import router from './router'
+import modals from './modals'
 import { createProvider } from './vue-apollo'
 import axios from'axios'
 import * as filters from './filters'
@@ -16,6 +18,8 @@ Object.keys(filters).forEach(key => {
 
 new Vue({
   router,
+  store,
   apolloProvider: createProvider(),
+  provide: { modals },
   render: h => h(App)
 }).$mount('#app')

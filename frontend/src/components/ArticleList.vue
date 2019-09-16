@@ -12,24 +12,23 @@ export default {
     title: { type: String, required: false, default: null },
     showImageLead: { type: Boolean, required: false, default: true },
   },
-  fragments: {
-    ...ArticleCard.fragments
-  }
+  // fragments: {
+  //   ...ArticleCard.fragments
+  // }
 }
 </script>
 
 <template>
-<ListContainer>
-
-  <template v-if="!!title" v-slot:heading>
-    {{ title }}
-  </template>
-  <template v-slot>
-    <ArticleCard
-      v-for="article in articles"
-      :key="article.id"
-      v-bind="{ article, showImageLead }"
-    />
-  </template>
-</ListContainer>
+  <ListContainer>
+    <template v-if="!!title" v-slot:heading>
+      {{ title }}
+    </template>
+    <template v-slot>
+      <ArticleCard
+        v-for="article in articles"
+        :key="article.id"
+        v-bind="{ article, showImageLead }"
+      />
+    </template>
+  </ListContainer>
 </template>

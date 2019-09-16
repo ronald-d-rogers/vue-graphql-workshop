@@ -1,9 +1,12 @@
 <script>
+// import gql from 'graphql-tag'
 import axios from 'axios'
 import Article from '../components/Article.vue'
+import ArticleCardClothesline from './ArticleCardClothesline.vue'
 
 export default {
   components: {
+    ArticleCardClothesline,
     Article
   },
   data () {
@@ -12,28 +15,66 @@ export default {
     }
   },
   mounted() {
-    axios
-      .get(`/article/${this.$route.params.id}`)
-      .then(res => {
-        const article = res.data
+    this.fetchArticle()
+  },
+  computed: {
+    id() {
+      return this.$route.params.id
+    }
+  },
+  methods: {
+    fetchArticle() {
+      axios
+        .get(`/article/${this.$route.params.id}`)
+        .then(res => {
+          const article = res.data
 
-        const authors = []
-        article.authors.forEach(id => {
-          axios
-            .get(`/author/${id}`)
-            .then(res => authors.push(res.data))
+          const authors = []
+          article.authors.forEach(id => {
+            axios
+              .get(`/author/${id}`)
+              .then(res => authors.push(res.data))
           })
 
-        article.authors = authors
-        this.article = article
-      })
+          article.authors = authors
+          this.article = article
+        })
+    }
+  },
+  watch: {
+    id() {
+      this.fetchArticle()
+    }
   }
+  // apollo: {
+  //   article: {
+  //     query: gql`
+  //       query getArticle($id: ID!) {
+  //         article(id: $id) {
+  //           ...ArticleContent
+  //         }
+  //       }
+  //       ${Article.fragments.article}
+  //     `,
+  //     variables() {
+  //       return {
+  //         id: this.$route.params.id
+  //       }
+  //     }
+  //   }
+  // }
 }
 </script>
 
 <template>
-  <Article
-    v-if="!!article"
-    v-bind="{ article }"
-  />
+  <div>
+    <ArticleCardClothesline
+      v-if="!!article"
+      v-bind="{ articleId: article.id }"
+    />
+    <Article
+      v-if="!!article"
+      v-bind="{ article }"
+    />
+  </div>
 </template>

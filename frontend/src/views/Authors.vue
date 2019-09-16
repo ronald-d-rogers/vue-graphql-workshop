@@ -13,36 +13,41 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get(`/authors`)
-      .then(res => {
-        const authors = res.data
+    this.fetchAuthors()
+  },
+  methods: {
+    fetchAuthors() {
+      return axios
+        .get(`/authors`)
+        .then(res => {
+          const authors = res.data
 
-        authors.forEach(author => {
-          const articles = []
-          author.articles.forEach(id => {
-            axios
-              .get(`/article/${id}`)
-              .then(res => {
-                const article = res.data
+          authors.forEach(author => {
+            const articles = []
+            author.articles.forEach(id => {
+              axios
+                .get(`/article/${id}`)
+                .then(res => {
+                  const article = res.data
 
-                const authors = []
-                article.authors.forEach(id => {
-                  axios
-                    .get(`/author/${id}`)
-                    .then(res => authors.push(res.data))
+                  const authors = []
+                  article.authors.forEach(id => {
+                    axios
+                      .get(`/author/${id}`)
+                      .then(res => authors.push(res.data))
+                  })
+
+                  article.authors = authors
+                  articles.push(article)
                 })
+            })
 
-                article.authors = authors
-                articles.push(article)
-              })
+            author.articles = articles
           })
 
-          author.articles = articles
+          this.authors = authors
         })
-
-        this.authors = authors
-      })
+    }
   }
   // apollo: {
   //   authors: gql`
@@ -60,5 +65,6 @@ export default {
 <template>
   <Authors
     v-if="!!authors"
-    v-bind="{ authors }"/>
+    v-bind="{ authors }"
+  />
 </template>

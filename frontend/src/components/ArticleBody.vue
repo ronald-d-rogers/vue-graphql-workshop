@@ -9,7 +9,8 @@ export default {
 <template>
   <section
     class="article-body"
-    v-html="body"/>
+    v-html="body"
+  />
 </template>
 
 <style lang="postcss">
