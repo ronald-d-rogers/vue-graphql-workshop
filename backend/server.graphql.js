@@ -1,7 +1,5 @@
 const merge = require('deepmerge')
-const gql = require('graphql-tag')
-const { makeExecutableSchema } = require('graphql-tools')
-const { graphqlExpress } = require('apollo-server-express')
+const { ApolloServer, gql } = require('apollo-server-express')
 
 const db = require('./database.js')
 
@@ -70,9 +68,9 @@ const resolvers = {
 }
 
 // Put together a schema
-const schema = makeExecutableSchema({
+const schema = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers
 })
 
-module.exports = graphqlExpress({ schema })
+module.exports = schema
