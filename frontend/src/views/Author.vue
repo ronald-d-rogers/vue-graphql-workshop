@@ -13,17 +13,17 @@ export default {
       author: null
     }
   },
-  computed: {
-    id() {
-      return this.$route.params.id
-    }
-  },
   mounted() {
     this.fetchAuthor()
   },
   watch: {
     id() {
       this.fetchAuthor()
+    }
+  },
+  computed: {
+    id() {
+      return this.$route.params.id
     }
   },
   methods: {
