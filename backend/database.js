@@ -105,6 +105,10 @@ module.exports = {
       filters.push(x => x.authors.some(y => y === _id(filter.authors.id)))
     }
 
+    if (filter.authors && filter.authors.name >= 0) {
+      filters.push(x => x.authors.some(y => y.name === filter.authors.name))
+    }
+
     return _slice(_filter(articles, filters), skip, first)
   },
   getAuthors({ filter = {}, skip = 0, first = 0 } = {}) {
