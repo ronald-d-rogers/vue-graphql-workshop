@@ -36,6 +36,11 @@ export default {
         {{ article.title }}
       </router-link>
     </h2>
+    <!--<img-->
+    <!--v-if="showImageLead && !!article.imageUrl"-->
+    <!--:src="article.imageUrl"-->
+    <!--:class="$style.imageLead"-->
+    <!--&gt;-->
     <ArticleByline
       v-if="showByline && !!article.authors.length"
       v-bind="{ authors: article.authors }"
