@@ -19,7 +19,6 @@ export default {
         articles {
           id
           title
-          imageUrl
           summary
           authors {
             id
