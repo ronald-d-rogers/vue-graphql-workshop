@@ -1,14 +1,18 @@
 <script>
-import axios from 'axios'
+import gql from 'graphql-tag'
+import ArticleCard from '../components/ArticleCard.vue'
 import clickOutside from '../directives/click-outside'
 
 export default {
   inject: ['modals'],
+  components: {
+    ArticleCard
+  },
   directives: {
     clickOutside
   },
   props: {
-    id: { type: Number, required: true }
+    id: { type: String, required: true }
   },
   data() {
     return {
@@ -20,9 +24,21 @@ export default {
   },
   methods: {
     save() {
-      axios
-        .put(`/author/${this.id}`, { name: this.name })
-        .then(() => this.modals.close())
+      return this.$apollo.mutate({
+        mutation: gql`
+          mutation updateAuthor($id: ID!, $name: String!) {
+            updateAuthor(id: $id, name: $name) {
+              id
+              articles {
+                ...ArticleCardContent
+              }
+            }
+          }
+          ${ArticleCard.fragments.articleCard}
+        `,
+        variables: { id: this.id, name: this.name }
+      })
+        .then(() => this.close())
     },
     close() {
       this.modals.close()
@@ -37,28 +53,30 @@ export default {
     v-click-outside="close"
     :class="$style.modal"
   >
-    <h3
-      :class="$style.title"
-    >Edit Author Name</h3>
-    <label
-      :class="$style.label"
-      for="name">
-      Name
-    </label>
-    <input
-      v-model="name"
-      :class="$style.input"
-      :ref="'name'"
-      type="text"
-      id="name"
-      name="name"
-    />
-    <div
-      :class="$style.buttons"
-    >
-      <button @click="close">Cancel</button>
-      <button @click="save">Save</button>
-    </div>
+    <form @submit.prevent="save">
+      <h3
+        :class="$style.title"
+      >Edit Author Name</h3>
+      <label
+        :class="$style.label"
+        for="name">
+        Name
+      </label>
+      <input
+        v-model="name"
+        :class="$style.input"
+        :ref="'name'"
+        type="text"
+        id="name"
+        name="name"
+      />
+      <div
+        :class="$style.buttons"
+      >
+        <button @click="close">Cancel</button>
+        <button @click="save" type="submit">Save</button>
+      </div>
+    </form>
   </div>
 </transition>
 </template>
