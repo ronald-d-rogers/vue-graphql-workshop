@@ -1,33 +1,33 @@
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
-    props: {
-      articleId: { type: Number, required: true }
-    },
-    computed: {
-      ...mapState(['articles']),
-      index() {
-        for (let i = 0; i < this.articles.length; i++) {
-          if (this.articles[i].id === this.articleId) {
-            return i
-          }
+export default {
+  props: {
+    articleId: { type: Number, required: true }
+  },
+  computed: {
+    ...mapState(['articles']),
+    index() {
+      for (let i = 0; i < this.articles.length; i++) {
+        if (this.articles[i].id === this.articleId) {
+          return i
         }
-
-        return null
-      },
-      previous() {
-        return this.index >= 0
-          ? this.articles[this.index - 1]
-          : null
-      },
-      next() {
-        return this.index < this.articles.length - 1
-          ? this.articles[this.index + 1]
-          : null
       }
+
+      return null
+    },
+    previous() {
+      return this.index >= 0
+        ? this.articles[this.index - 1]
+        : null
+    },
+    next() {
+      return this.index < this.articles.length - 1
+        ? this.articles[this.index + 1]
+        : null
     }
   }
+}
 </script>
 
 <template>
