@@ -1,14 +1,14 @@
 <script>
-  export default {
-    props: {
-      authors: { type: Array, required: true }
-    },
-    computed: {
-      last() {
-        return this.authors.length - 1
-      }
+export default {
+  props: {
+    authors: { type: Array, required: true }
+  },
+  computed: {
+    last() {
+      return this.authors.length - 1
     }
   }
+}
 </script>
 
 <template>
