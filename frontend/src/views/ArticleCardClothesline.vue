@@ -1,12 +1,25 @@
 <script>
-  import { mapState } from 'vuex'
+  import gql from 'graphql-tag'
+  import ArticleList from '../components/ArticleList.vue'
 
   export default {
     props: {
-      articleId: { type: Number, required: true }
+      articleId: { type: String, required: true }
+    },
+    components: {
+      ArticleList
+    },
+    apollo: {
+      articles: gql`
+        query getArticles {
+          articles {
+            ...ArticleCardContent
+          }
+        }
+        ${ArticleList.fragments.articleCard}
+      `
     },
     computed: {
-      ...mapState(['articles']),
       index() {
         for (let i = 0; i < this.articles.length; i++) {
           if (this.articles[i].id === this.articleId) {
@@ -32,7 +45,7 @@
 
 <template>
   <nav
-    v-if="!!articles.length"
+    v-if="!!articles && !!articles.length"
     :class="$style.nav"
   >
     <div

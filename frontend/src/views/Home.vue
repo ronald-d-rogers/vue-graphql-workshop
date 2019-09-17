@@ -1,17 +1,10 @@
 <script>
 import gql from 'graphql-tag'
-import { mapActions } from 'vuex'
 import ArticleList from '../components/ArticleList.vue'
 
 export default {
   components: {
     ArticleList
-  },
-  methods: {
-    ...mapActions(['fetchArticles'])
-  },
-  created() {
-    this.fetchArticles()
   },
   apollo: {
     articles: gql`

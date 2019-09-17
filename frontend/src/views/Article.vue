@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios'
+import gql from 'graphql-tag'
 import Article from '../components/Article.vue'
 import ArticleCardClothesline from './ArticleCardClothesline.vue'
 
@@ -8,41 +8,21 @@ export default {
     ArticleCardClothesline,
     Article
   },
-  data () {
-    return {
-      article: null
-    }
-  },
-  mounted() {
-    this.fetchArticle()
-  },
-  watch: {
-    id() {
-      this.fetchArticle()
-    }
-  },
-  computed: {
-    id() {
-      return this.$route.params.id
-    }
-  },
-  methods: {
-    fetchArticle() {
-      axios
-        .get(`/article/${this.$route.params.id}`)
-        .then(res => {
-          const article = res.data
-
-          const authors = []
-          article.authors.forEach(id => {
-            axios
-              .get(`/author/${id}`)
-              .then(res => authors.push(res.data))
-          })
-
-          article.authors = authors
-          this.article = article
-        })
+  apollo: {
+    article: {
+      query: gql`
+        query getArticle($id: ID!) {
+          article(id: $id) {
+            ...ArticleContent
+          }
+        }
+        ${Article.fragments.article}
+      `,
+      variables() {
+        return {
+          id: this.$route.params.id
+        }
+      }
     }
   }
 }
