@@ -5,38 +5,38 @@ const db = require('./database.js')
 
 // The GraphQL schema in string form
 const typeDefs = gql`
-    input AuthorFilter {
-        id: ID
-        name: String
-    }
-    input ArticleFilter {
-        id: ID
-    }
-    type Article {
-        id: ID!
-        title: String!
-        summary: String
-        body: String
-        imageUrl: String
-        authors(filter: AuthorFilter, skip: Int, first: Int): [Author]
-        postedDate: String
-    }
-    type Author {
-        id: ID!
-        name: String!
-        bio: String
-        avatarUrl: String
-        articles(filter: ArticleFilter, skip: Int, first: Int): [Article]
-    }
-    type Query {
-        author (id: ID!): Author
-        article (id: ID!): Article
-        articles (filter: ArticleFilter, skip: Int, first: Int): [Article]
-        authors (filter: AuthorFilter, skip: Int, first: Int): [Author]
-    }
-    type Mutation {
-        updateAuthor (id: ID!, name: String!): Author
-    }
+  input AuthorFilter {
+    id: ID
+    name: String
+  }
+  input ArticleFilter {
+    id: ID
+  }
+  type Article {
+    id: ID!
+    title: String!
+    summary: String
+    body: String
+    imageUrl: String
+    authors(filter: AuthorFilter, skip: Int, first: Int): [Author]
+    postedDate: String
+  }
+  type Author {
+    id: ID!
+    name: String!
+    bio: String
+    avatarUrl: String
+    articles(filter: ArticleFilter, skip: Int, first: Int): [Article]
+  }
+  type Query {
+    author (id: ID!): Author
+    article (id: ID!): Article
+    articles (filter: ArticleFilter, skip: Int, first: Int): [Article]
+    authors (filter: AuthorFilter, skip: Int, first: Int): [Author]
+  }
+  type Mutation {
+    updateAuthor (id: ID!, name: String!): Author
+  }
 `
 
 // The resolvers
