@@ -6,9 +6,6 @@
     props: {
       articleId: { type: String, required: true }
     },
-    components: {
-      ArticleList
-    },
     apollo: {
       articles: gql`
         query getArticles {
