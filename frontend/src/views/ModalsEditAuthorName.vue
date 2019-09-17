@@ -5,9 +5,6 @@ import clickOutside from '../directives/click-outside'
 
 export default {
   inject: ['modals'],
-  components: {
-    ArticleCard
-  },
   directives: {
     clickOutside
   },
