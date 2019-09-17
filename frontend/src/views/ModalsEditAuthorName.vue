@@ -40,25 +40,27 @@ export default {
     <h3
       :class="$style.title"
     >Edit Author Name</h3>
-    <label
-      :class="$style.label"
-      for="name">
-      Name
-    </label>
-    <input
-      v-model="name"
-      :class="$style.input"
-      :ref="'name'"
-      type="text"
-      id="name"
-      name="name"
-    />
-    <div
-      :class="$style.buttons"
-    >
-      <button @click="close">Cancel</button>
-      <button @click="save">Save</button>
-    </div>
+    <form @submit.prevent="save">
+      <label
+        :class="$style.label"
+        for="name">
+        Name
+      </label>
+      <input
+        v-model="name"
+        :class="$style.input"
+        :ref="'name'"
+        type="text"
+        id="name"
+        name="name"
+      />
+      <div
+        :class="$style.buttons"
+      >
+        <button @click="close">Cancel</button>
+        <button @click.prevent="save" type="submit">Save</button>
+      </div>
+    </form>
   </div>
 </transition>
 </template>

@@ -32,7 +32,7 @@
 
 <template>
   <nav
-    v-if="!!articles.length"
+    v-if="!!articles && !!articles.length"
     :class="$style.nav"
   >
     <div
