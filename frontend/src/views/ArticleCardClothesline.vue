@@ -1,43 +1,43 @@
 <script>
-  import gql from 'graphql-tag'
-  import ArticleList from '../components/ArticleList.vue'
+import gql from 'graphql-tag'
+import ArticleList from '../components/ArticleList.vue'
 
-  export default {
-    props: {
-      articleId: { type: String, required: true }
-    },
-    apollo: {
-      articles: gql`
-        query getArticles {
-          articles {
-            ...ArticleCardContent
-          }
+export default {
+  props: {
+    articleId: { type: String, required: true }
+  },
+  apollo: {
+    articles: gql`
+      query getArticles {
+        articles {
+          ...ArticleCardContent
         }
-        ${ArticleList.fragments.articleCard}
-      `
-    },
-    computed: {
-      index() {
-        for (let i = 0; i < this.articles.length; i++) {
-          if (this.articles[i].id === this.articleId) {
-            return i
-          }
-        }
-
-        return null
-      },
-      previous() {
-        return this.index >= 0
-          ? this.articles[this.index - 1]
-          : null
-      },
-      next() {
-        return this.index < this.articles.length - 1
-          ? this.articles[this.index + 1]
-          : null
       }
+      ${ArticleList.fragments.articleCard}
+    `
+  },
+  computed: {
+    index() {
+      for (let i = 0; i < this.articles.length; i++) {
+        if (this.articles[i].id === this.articleId) {
+          return i
+        }
+      }
+
+      return null
+    },
+    previous() {
+      return this.index >= 0
+        ? this.articles[this.index - 1]
+        : null
+    },
+    next() {
+      return this.index < this.articles.length - 1
+        ? this.articles[this.index + 1]
+        : null
     }
   }
+}
 </script>
 
 <template>
