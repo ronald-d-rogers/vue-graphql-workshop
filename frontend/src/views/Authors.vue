@@ -48,7 +48,7 @@ export default {
           this.authors = authors
         })
     }
-  }
+  },
   // apollo: {
   //   authors: gql`
   //     query getAuthors {

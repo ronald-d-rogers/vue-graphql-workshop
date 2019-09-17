@@ -1,19 +1,19 @@
 <script>
 // import gql from 'graphql-tag'
-// import ArticleByline from '../components/ArticleByline.vue'
+// import ArticleCard from '../components/ArticleCard.vue'
 import axios from 'axios'
 import clickOutside from '../directives/click-outside'
 
 export default {
-  // components: {
-  //   ArticleByline
-  // },
   inject: ['modals'],
+  // components: {
+  //   ArticleCard
+  // },
   directives: {
     clickOutside,
   },
   props: {
-    id: { type: Number, required: true }
+    id: { type: String, required: true }
   },
   data() {
     return {
@@ -32,21 +32,20 @@ export default {
     // save() {
     //   return this.$apollo.mutate({
     //     mutation: gql`
-    //     mutation updateAuthor($id: ID!, $name: String!) {
-    //       updateAuthor(id: $id, name: $name) {
-    //         author {
+    //       mutation updateAuthor($id: ID!, $name: String!) {
+    //         updateAuthor(id: $id, name: $name) {
     //           id
     //           articles {
-    //             ...ArticleBylineContent
+    //             ...ArticleCardContent
     //           }
     //         }
     //       }
-    //     }
-    //     ${ArticleByline.fragments.articleByline}
-    //   `,
-    //     variables: { id: this.id, id: this.id }
+    //       ${ArticleCard.fragments.articleCard}
+    //     `,
+    //     variables: { id: this.id, name: this.name }
     //   })
-    // }
+    //     .then(() => this.close())
+    // },
     close() {
       this.modals.close()
     }
@@ -63,25 +62,27 @@ export default {
     <h3
       :class="$style.title"
     >Edit Author Name</h3>
-    <label
-      :class="$style.label"
-      for="name">
-      Name
-    </label>
-    <input
-      v-model="name"
-      :class="$style.input"
-      :ref="'name'"
-      type="text"
-      id="name"
-      name="name"
-    />
-    <div
-      :class="$style.buttons"
-    >
-      <button @click="close">Cancel</button>
-      <button @click="save">Save</button>
-    </div>
+    <form @submit.prevent="save">
+      <label
+        :class="$style.label"
+        for="name">
+        Name
+      </label>
+      <input
+        v-model="name"
+        :class="$style.input"
+        :ref="'name'"
+        type="text"
+        id="name"
+        name="name"
+      />
+      <div
+        :class="$style.buttons"
+      >
+        <button @click="close">Cancel</button>
+        <button @click.prevent="save" type="submit">Save</button>
+      </div>
+    </form>
   </div>
 </transition>
 </template>

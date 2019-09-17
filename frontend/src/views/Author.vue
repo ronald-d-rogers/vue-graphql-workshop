@@ -55,9 +55,8 @@ export default {
           author.articles = articles
           this.author = author
         })
-    },
-
-  }
+    }
+  },
   // apollo: {
   //   author: {
   //     query: gql`
@@ -70,7 +69,7 @@ export default {
   //     `,
   //     variables() {
   //       return {
-  //         id: this.$route.params.id
+  //         id: this.id
   //       }
   //     }
   //   }
