@@ -75,20 +75,22 @@ for (const article of articles) {
   }
 }
 
-const reduce = (items, filters) =>
+const _id = id => parseInt(id)
+
+const _filter = (items, filters) =>
   filters.reduce((results, filter) => results.filter(filter), items)
 
-const slice = (results, skip, first) =>
+const _slice = (results, skip, first) =>
   results
     .slice(skip)
     .slice(0, first || results.length)
 
 module.exports = {
   getArticle(id) {
-    return articles.find(x => x.id === id)
+    return articles.find(x => x.id === _id(id))
   },
   getAuthor(id) {
-    return authors.find(x => x.id === id)
+    return authors.find(x => x.id === _id(id))
   },
   getArticles({ filter = {}, skip = 0, first = 0 } = {}) {
     const filters = []
@@ -96,18 +98,18 @@ module.exports = {
     console.info(filter)
 
     if (filter.id >= 0) {
-      filters.push(x => x.id === filter.id)
+      filters.push(x => x.id === _id(filter.id))
     }
 
     if (filter.authors && filter.authors.id >= 0) {
-      filters.push(x => x.authors.some(y => y === filter.authors.id))
+      filters.push(x => x.authors.some(y => y === _id(filter.authors.id)))
     }
 
-    if (filter.authors && filter.authors.name >= 0) {
+    if (filter.authors && !!filter.authors.name) {
       filters.push(x => x.authors.some(y => y.name === filter.authors.name))
     }
 
-    return slice(reduce(articles, filters), skip, first)
+    return _slice(_filter(articles, filters), skip, first)
   },
   getAuthors({ filter = {}, skip = 0, first = 0 } = {}) {
     const filters = []
@@ -115,29 +117,37 @@ module.exports = {
     console.info(filter)
 
     if (filter.id >= 0) {
-      filters.push(x => x.id === id)
+      filters.push(x => x.id === _id(filter.id))
+    }
+
+    if (filter.name) {
+      filters.push(x => x.name === filter.name)
     }
 
     if (filter.articles && filter.articles.id >= 0) {
-      filters.push(x => x.articles.some(y => y === filter.articles.id))
+      filters.push(x => x.articles.some(y => y === _id(filter.articles.id)))
     }
 
-    return slice(reduce(authors, filters), skip, first)
+    return _slice(_filter(authors, filters), skip, first)
   },
   updateArticle(id, input) {
-    const article = articles.find(x => x.id === id)
+    const article = articles.find(x => x.id === _id(id))
 
     for (const prop in input) {
-      article[prop] = input[prop]
+      if (prop !== 'id') {
+        article[prop] = input[prop]
+      }
     }
 
     return article
   },
   updateAuthor(id, input) {
-    const author = authors.find(x => x.id === id)
+    const author = authors.find(x => x.id === _id(id))
 
     for (const prop in input) {
-      author[prop] = input[prop]
+      if (prop !== 'id') {
+        author[prop] = input[prop]
+      }
     }
 
     return author
