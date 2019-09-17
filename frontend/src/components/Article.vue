@@ -14,7 +14,6 @@ export default {
         id
         title
         postedDate
-        imageUrl
         body
         authors {
           ...BylineAuthorContent

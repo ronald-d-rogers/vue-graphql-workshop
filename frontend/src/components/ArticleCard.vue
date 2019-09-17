@@ -11,7 +11,6 @@ export default {
       fragment ArticleCardContent on Article {
         id
         title
-        imageUrl
         summary
         authors {
           ...BylineAuthorContent

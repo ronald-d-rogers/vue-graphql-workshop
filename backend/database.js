@@ -105,7 +105,7 @@ module.exports = {
       filters.push(x => x.authors.some(y => y === _id(filter.authors.id)))
     }
 
-    if (filter.authors && filter.authors.name >= 0) {
+    if (filter.authors && !!filter.authors.name) {
       filters.push(x => x.authors.some(y => y.name === filter.authors.name))
     }
 
@@ -118,6 +118,10 @@ module.exports = {
 
     if (filter.id >= 0) {
       filters.push(x => x.id === _id(filter.id))
+    }
+
+    if (filter.name) {
+      filters.push(x => x.name === filter.name)
     }
 
     if (filter.articles && filter.articles.id >= 0) {
