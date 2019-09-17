@@ -4,7 +4,7 @@ export function apDate(date) {
   if (!date) return ''
 
   if (!(date instanceof Date)) {
-    date = new Date(date)
+    date = new Date(parseInt(date))
   }
 
   const month = monthList[date.getMonth()]
