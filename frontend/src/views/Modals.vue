@@ -1,11 +1,11 @@
 <script>
-  import EditAuthorNameModal from './ModalsEditAuthorName.vue'
-  export default {
-    inject: ['modals'],
-    components: {
-      EditAuthorNameModal
-    }
+import EditAuthorNameModal from './ModalsEditAuthorName.vue'
+export default {
+  inject: ['modals'],
+  components: {
+    EditAuthorNameModal
   }
+}
 </script>
 
 <template>
