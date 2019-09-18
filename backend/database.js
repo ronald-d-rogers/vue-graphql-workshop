@@ -31,16 +31,13 @@ function postedDate(days) {
 const avatarUrl = 'http://localhost:3000/assets/avatar.png'
 
 const imageUrls = [
-  'http://localhost:3000/assets/animals1.png',
-  'http://localhost:3000/assets/animals2.png',
-  'http://localhost:3000/assets/animals3.png',
-  'http://localhost:3000/assets/cats1.png',
-  'http://localhost:3000/assets/cats2.png',
-  'http://localhost:3000/assets/cats3.png',
-  'http://localhost:3000/assets/nature1.png',
-  'http://localhost:3000/assets/nature2.png',
-  'http://localhost:3000/assets/nature3.png',
-  'http://localhost:3000/assets/transport1.png',
+  'https://images.unsplash.com/photo-1505832018823-50331d70d237?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1382&q=80',
+  'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1515816052601-210d5501d471?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80',
+  'https://images.unsplash.com/photo-1539103377911-4909a1eae382?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1562948853-5d887f0c4cde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1533591380348-14193f1de18f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
+  'https://images.unsplash.com/photo-1560689939-c5f3623eaf1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
 ]
 
 const authors = Array.from(
